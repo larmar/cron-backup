@@ -1,6 +1,6 @@
-FROM golang:1.19 as build-walg
+FROM golang:1.21 as build
 
-ARG WALG_RELEASE=v1.1
+ARG WALG_RELEASE=v2.0.1
 
 RUN apt-get update -qq && apt-get install -qqy --no-install-recommends --no-install-suggests cmake liblzo2-dev libsodium23 && \
     cd /go/src/ && \
@@ -8,8 +8,7 @@ RUN apt-get update -qq && apt-get install -qqy --no-install-recommends --no-inst
     cd wal-g && \
     GOBIN=/go/bin USE_LIBSODIUM=1 USE_LZO=1 make install_and_build_pg
 
-
-FROM python:3.10
+FROM python:3.12
 MAINTAINER Linserv AB <info@linserv.se>
 
 RUN apt-get update  && apt-get install -y \
