@@ -19,7 +19,7 @@ RUN apt-get update  && apt-get install -y \
 
 #    apt-get install -qqy curl ca-certificates libsodium23 vim
 
-COPY --from=build-walg /go/src/wal-g/main/pg/wal-g /usr/local/bin/wal-g
+COPY --from=build /go/src/wal-g/main/pg/wal-g /usr/local/bin/wal-g
 
 ADD crontab.txt /crontab.txt
 ADD backup.sh /backup.sh
