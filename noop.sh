@@ -1,6 +1,6 @@
 #!/bin/sh
 
 printenv | grep -E 'AWS_ACCESS_KEY_ID|AWS_SECRET_ACCESS_KEY|GPG_KEY|PASSPHRASE|AWS_REGION|SOURCE|DEST|WALG_S3_PREFIX|DUPLICITY_BACKUP_EXTRA' >> /etc/environment
-# start cron
-/usr/bin/crontab /crontab.txt
+
+# start cron without jobs
 /usr/sbin/cron -f -L 8
