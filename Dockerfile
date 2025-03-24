@@ -6,6 +6,7 @@ RUN apt-get update -qq && apt-get install -qqy --no-install-recommends --no-inst
     cd /go/src/ && \
     git clone -b $WALG_RELEASE --recurse-submodules https://github.com/wal-g/wal-g.git && \
     cd wal-g && \
+    go mod tidy && \
     GOBIN=/go/bin LIBBROTLI=1 USE_LIBSODIUM=1 USE_LZO=1 make install_and_build_pg
 
 FROM python:3.12
