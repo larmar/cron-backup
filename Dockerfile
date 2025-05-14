@@ -15,6 +15,7 @@ RUN apt-get update  && apt-get install -y \
     cron \
     duplicity \
     python3-boto \
+    python3-boto3 \
     && rm -rf /var/lib/apt/lists/*
 
 #    apt-get install -qqy curl ca-certificates libsodium23 vim
