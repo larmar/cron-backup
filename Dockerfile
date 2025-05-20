@@ -21,6 +21,7 @@ RUN apt-get update  && apt-get install -y \
     duplicity \
     borgbackup \
     python3-boto \
+    python3-boto3 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
