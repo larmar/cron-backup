@@ -1,8 +1,9 @@
 FROM golang:1.23 AS build
 
-ARG WALG_RELEASE=v3.0.1
+ARG WALG_RELEASE=v3.0.5
+ENV USE_LIBSODIUM=1
 
-RUN apt-get update -qq && apt-get install -qqy --no-install-recommends --no-install-suggests git curl cmake build-essential liblzo2-dev libsodium-dev && \
+RUN apt-get update -qq && apt-get install -qqy --no-install-recommends --no-install-suggests git curl cmake build-essential libsodium-dev && \
     cd /go/src/ && \
     git clone -b $WALG_RELEASE --recurse-submodules https://github.com/wal-g/wal-g.git && \
     cd wal-g && \
@@ -24,7 +25,6 @@ RUN apt-get update  && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-
 COPY --from=build /go/bin/wal-g /usr/local/bin/wal-g
 
 ADD crontab.txt /crontab.txt
@@ -33,7 +33,6 @@ ADD restore.sh /restore.sh
 ADD noop.sh /noop.sh
 COPY entry.sh /entry.sh
 RUN chmod 755 /entry.sh /backup.sh /restore.sh /noop.sh
-# RUN /usr/bin/crontab /crontab.txt # Moved to entry.sh
 
 VOLUME ["/root/.gnupg","/root/.ssh","/mnt"]
 
